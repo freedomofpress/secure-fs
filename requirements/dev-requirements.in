@@ -1,0 +1,13 @@
+black
+coverage
+flake8
+isort
+mypy
+pyotp
+pytest
+pytest-cov
+pytest-mock
+pytest-random-order
+pytest-mock
+pip-tools==6.2.0
+semgrep
