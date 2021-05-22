@@ -1,0 +1,41 @@
+---
+common-steps:
+  - &run_tests
+    run:
+      name: Install requirements and run tests
+      command: |
+        set -e
+        make venv
+        source .venv/bin/activate
+        make check --keep-going
+  - &check_python_dependencies_for_vulns
+    run:
+      name: Check Python dependencies for known vulnerabilities
+      command: |
+        set -e
+        source .venv/bin/activate
+        make safety
+  - &run_static_analysis
+    run:
+      name: Run static analysis on source code to find security issues
+      command: |
+        set -e
+        source .venv/bin/activate
+        make bandit
+
+version: 2
+jobs:
+  test-buster:
+    docker:
+      - image: circleci/python:3.7-buster
+    steps:
+      - checkout
+      - *run_tests
+      - *check_python_dependencies_for_vulns
+      - *run_static_analysis
+
+workflows:
+  version: 2
+  secure_fs_ci:
+    jobs:
+      - test-buster

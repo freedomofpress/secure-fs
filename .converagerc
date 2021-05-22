@@ -1,0 +1,2 @@
+[run]
+omit = secure_fs/__init__.py

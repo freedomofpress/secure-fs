@@ -1,0 +1,8 @@
+include requirements/dev-requirements.txt
+include README.md
+include LICENSE
+include CHANGELOG.md
+include setup.py
+
+recursive-include secure_fs *
+recursive-exclude secure_fs *.pyc
